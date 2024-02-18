@@ -12,6 +12,7 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
+import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 const Login = () => {
   const theme = useTheme();
@@ -22,6 +23,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [text] = useTypewriter({
+    words: [' What is the definition of a non-filer according to the Companies Ordinance, 1984 as stated in the Finance Act of 2021?',
+     'What changes have been made to the definition of Officer of Inland Revenue in the Ordinance and when did they become effective? ',
+      'What is the definition of a public company according to the Companies Ordinance and the Finance Act?',
+      'What is meant by the term taxpayer under the Finance Act, and who does it include? ',
+      'What is the tax rate specified in the First Schedule for taxable income under this Ordinance? '
+    ],
+    loop:{},
+    typeSpeed: 50,
+    deleteSpeed: 20,
+  });
 
   //register ctrl
   const handleSubmit = async (e) => {
@@ -47,15 +60,26 @@ const Login = () => {
   return (
     <div
       style={{
-        backgroundImage: `url('/images/img-home.jpg')`, // Change this to your image path
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        position: "relative",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
+      <video
+        src='/videos/video (2160p) (1).mp4' // Change this to your video path
+        autoPlay
+        loop
+        muted
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
+        }}
+      />
       <Box
         width={isNotMobile ? "40%" : "80%"}
         p={"2rem"}
@@ -63,6 +87,7 @@ const Login = () => {
         sx={{
           boxShadow: 5,
           backgroundColor: "white", // Change background color to white
+          zIndex: 1, // Ensure box stays above the video
         }}
       >
         <Collapse in={error}>
@@ -109,7 +134,9 @@ const Login = () => {
           </Typography>
         </form>
       </Box>
+    
     </div>
+   
   );
 };
 
