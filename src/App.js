@@ -7,6 +7,8 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import login from './components/pages/Login';
+import Footer from './components/Footer';
+
 function App() {
   return (
     <>
@@ -19,7 +21,9 @@ function App() {
           <Route path='/sign-up' component={SignUp} />
           <Route path='/login' component={login} />
         </Switch>
+    <Footer/>
       </Router>
+      
     </>
   );
 }
