@@ -47,15 +47,26 @@ const SignUp = () => {
   return (
     <div
       style={{
-        backgroundImage: `url('/images/img-home.jpg')`, // Change this to your image path
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        position: "relative",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
+      <video
+        src='/videos/video (2160p) (1).mp4' // Change this to your video path
+        autoPlay
+        loop
+        muted
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
+        }}
+      />
       <Box
         width={isNotMobile ? "40%" : "80%"}
         p={"2rem"}
