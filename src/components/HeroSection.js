@@ -22,7 +22,7 @@ function HeroSection() {
  
   return (
     <div className='hero-container'>
-      <video src='/videos/video-2.mp4' autoPlay loop muted />
+      <video src='/videos/video (2160p).mp4' autoPlay loop muted />
       <h1>Your Personal Consultant</h1>
       <p>Ask us anything related to income tax:</p>
       <h2 style={{margin:'50px'}}>
