@@ -29,7 +29,7 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            Tax-Tajweez
+            Tax Tajweez
             <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
@@ -71,7 +71,7 @@ function Navbar() {
 
           
 
-            <li>
+            <li >
               <Link
                 to='/sign-up'
                 className='nav-links-mobile'
@@ -83,7 +83,7 @@ function Navbar() {
           </ul>
           
           {button && <Btn buttonStyle='btn--outline'  >Login</Btn>}
-          {button && <Button buttonStyle='btn--outline'>Sign Up</Button>}
+          {button && <div style={{marginLeft:'10px'}}><Button buttonStyle='btn--outline' >Sign Up</Button></div>}
           
         </div>
       </nav>
