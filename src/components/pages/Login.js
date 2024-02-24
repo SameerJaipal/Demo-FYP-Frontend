@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import {
   Box,
   Typography,
@@ -12,45 +11,31 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
-import { useTypewriter, Cursor } from 'react-simple-typewriter';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Login = () => {
   const theme = useTheme();
   const history = useHistory();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const [text] = useTypewriter({
-    words: [' What is the definition of a non-filer according to the Companies Ordinance, 1984 as stated in the Finance Act of 2021?',
-     'What changes have been made to the definition of Officer of Inland Revenue in the Ordinance and when did they become effective? ',
-      'What is the definition of a public company according to the Companies Ordinance and the Finance Act?',
-      'What is meant by the term taxpayer under the Finance Act, and who does it include? ',
-      'What is the tax rate specified in the First Schedule for taxable income under this Ordinance? '
-    ],
-    loop:{},
-    typeSpeed: 50,
-    deleteSpeed: 20,
-  });
-
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/login", { email, password });
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
       toast.success("Login Successfully");
       localStorage.setItem("authToken", true);
-      history.push("/"); // Redirect to home page
+      history.push("/chatbot");
     } catch (err) {
-      console.log(error);
-      if (err.response.data.error) {
-        setError(err.response.data.error);
-      } else if (err.message) {
-        setError(err.message);
-      }
+      console.log(err);
+      console.log("Email:", email);
+      console.log("Password:", password);
+
+      setError("Failed to login. Please check your credentials.");
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -68,7 +53,7 @@ const Login = () => {
       }}
     >
       <video
-        src='/videos/video (2160p) (1).mp4' // Change this to your video path
+        src='/videos/video (2160p) (1).mp4'
         autoPlay
         loop
         muted
@@ -86,8 +71,8 @@ const Login = () => {
         borderRadius={5}
         sx={{
           boxShadow: 5,
-          backgroundColor: "white", // Change background color to white
-          zIndex: 1, // Ensure box stays above the video
+          backgroundColor: "white",
+          zIndex: 1,
         }}
       >
         <Collapse in={error}>
@@ -97,7 +82,6 @@ const Login = () => {
         </Collapse>
         <form onSubmit={handleSubmit}>
           <Typography variant="h3">Login</Typography>
-
           <TextField
             label="email"
             type="email"
@@ -105,9 +89,7 @@ const Login = () => {
             margin="normal"
             fullWidth
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="password"
@@ -116,9 +98,7 @@ const Login = () => {
             margin="normal"
             fullWidth
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -134,9 +114,7 @@ const Login = () => {
           </Typography>
         </form>
       </Box>
-    
     </div>
-   
   );
 };
 

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom"; // Change import
+import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { firestore } from "../../firebase";
+import { collection, addDoc } from "@firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+
 import {
   Box,
   Typography,
@@ -15,32 +19,36 @@ import {
 
 const SignUp = () => {
   const theme = useTheme();
-  const history = useHistory(); // Change to useHistory
-  //media
+  const history = useHistory();
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/register", { username, email, password });
-      toast.success("User Register Successfully");
-      history.push("/login"); // Use history.push instead of navigate
+      // Create user in Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Store additional user data in Firestore
+      await addDoc(collection(firestore, "users"), {
+        uid: user.uid,
+        username,
+        email,
+      });
+
+      // Show success message
+      toast.success("User registered successfully");
+
+      // Redirect to login page
+      history.push("/login");
     } catch (err) {
-      console.log(error);
-      if (err.response.data.error) {
-        setError(err.response.data.error);
-      } else if (err.message) {
-        setError(err.message);
-      }
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      console.error("Error registering user: ", err);
+      setError("Failed to register user. Please try again.");
     }
   };
 
@@ -55,7 +63,7 @@ const SignUp = () => {
       }}
     >
       <video
-        src='/videos/video (2160p) (1).mp4' // Change this to your video path
+        src="/videos/video (2160p) (1).mp4"
         autoPlay
         loop
         muted
@@ -83,36 +91,30 @@ const SignUp = () => {
         <form onSubmit={handleSubmit}>
           <Typography variant="h3">Sign Up</Typography>
           <TextField
-            label="username"
+            label="Username"
             required
             margin="normal"
             fullWidth
             value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
-            label="email"
+            label="Email"
             type="email"
             required
             margin="normal"
             fullWidth
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            label="password"
+            label="Password"
             type="password"
             required
             margin="normal"
             fullWidth
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
