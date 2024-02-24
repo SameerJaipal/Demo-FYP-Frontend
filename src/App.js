@@ -8,6 +8,7 @@ import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import login from './components/pages/Login';
 import Footer from './components/Footer';
+import chatbot from './components/pages/chatbot';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/login' component={login} />
+          <Route path = '/chatbot' component = {chatbot} />
         </Switch>
     <Footer/>
       </Router>
