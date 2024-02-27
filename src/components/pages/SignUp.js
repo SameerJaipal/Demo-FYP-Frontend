@@ -16,6 +16,8 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const SignUp = () => {
   const theme = useTheme();
@@ -52,7 +54,8 @@ const SignUp = () => {
     }
   };
 
-  return (
+  return (<>
+    <Navbar/>
     <div
       style={{
         position: "relative",
@@ -131,6 +134,8 @@ const SignUp = () => {
         </form>
       </Box>
     </div>
+    <Footer/>
+    </>
   );
 };
 

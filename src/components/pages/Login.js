@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
+
 import {
   Box,
   Typography,
@@ -13,6 +14,8 @@ import {
 } from "@mui/material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const Login = () => {
   const theme = useTheme();
@@ -42,7 +45,8 @@ const Login = () => {
     }
   };
 
-  return (
+  return (<>
+    <Navbar/>
     <div
       style={{
         position: "relative",
@@ -115,6 +119,8 @@ const Login = () => {
         </form>
       </Box>
     </div>
+    <Footer/>
+    </>
   );
 };
 
