@@ -13,6 +13,7 @@ html {
 
 
 
+
 .App{
     min-height: 100vh;
     display: flex;
@@ -130,15 +131,22 @@ html {
     margin: 6rem 10rem;
     margin-bottom: 0;
 }
-
+.chats::-webkit-scrollbar {
+    display: none;
+  }
 .chats{
     overflow: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
     overflow-y: scroll;
     scroll-behavior: smooth;
     width: 100%;
     max-width: 70rem;
     height: calc(100vh - 17rem);
 }
+.chats::-webkit-scrollbar-track {
+    display: none; /* Hide scrollbar track */
+  }
 
 .chat{
     margin: 1rem;
