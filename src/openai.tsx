@@ -4,7 +4,7 @@
 // const openai = new OpenAIApi(configuration);
 // import { openai } from 'https://cdn.jsdelivr.net/npm/openai/dist/openai.es.js';
 import OpenAI from "openai";
-const openai =  new OpenAI({ apiKey: "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" , dangerouslyAllowBrowser: true });
+const openai =  new OpenAI({ apiKey: "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" , dangerouslyAllowBrowser: true });
 // const apiKey = "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"; // Replace this with your actual API key
 // openai.apiKey = apiKey;
 
