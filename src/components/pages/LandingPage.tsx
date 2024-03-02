@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import TypewriterComponent from "typewriter-effect";
+import "../../index.css"
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const LandingPage = () => {
   }
   return (
     <>
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center body">
         <div className="font-bold py-36 text-center space-y-5">
           <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
             <h1 className=" lg:text-7xlxl md:text-6xl text-white">
